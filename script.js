@@ -1,4 +1,5 @@
 function predictDelay() {
+
     const landArea = Number(document.getElementById("landArea").value);
     const documents = Number(document.getElementById("documents").value);
     const approval = Number(document.getElementById("approval").value);
@@ -13,26 +14,22 @@ function predictDelay() {
         risk += 30;
     }
 
-    if (approval < 60) {
-        risk += 30;
+    if (approval < 50) {
+        risk += 40;
     }
 
-    if (risk >= 60) {
-        showResult("High Risk", risk);
-    } else if (risk >= 30) {
-        showResult("Medium Risk", risk);
-    } else {
-        showResult("Low Risk", risk);
+    let result = "";
+
+    if (risk >= 70) {
+        result = "⚠️ High Risk of Delay";
+    } 
+    else if (risk >= 40) {
+        result = "🟡 Medium Risk of Delay";
+    } 
+    else {
+        result = "🟢 Low Risk of Delay";
     }
-}
 
-function showResult(level, score) {
-    const result = document.getElementById("result");
-
-    result.innerHTML = `
-        <h2>Prediction Result</h2>
-        <p><strong>Delay Risk:</strong> ${level}</p>
-        <p><strong>Risk Score:</strong> ${score}%</p>
-        <p>Early detection can help authorities take preventive action.</p>
-    `;
+    document.getElementById("result").innerHTML =
+        "Prediction: " + result;
 }
