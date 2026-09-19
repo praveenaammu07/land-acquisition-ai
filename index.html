@@ -1,1 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Land Acquisition AI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            🏛️
+            <div>
+                <h2>Land Acquisition</h2>
+                <span>AI Monitoring System</span>
+            </div>
+        </div>
+
+        <nav>
+            <button onclick="showPage('dashboard')" class="nav-btn active">
+                📊 Dashboard
+            </button>
+
+            <button onclick="showPage('projects')" class="nav-btn">
+                🏞️ Projects
+            </button>
+
+            <button onclick="showPage('add')" class="nav-btn">
+                ➕ Add Project
+            </button>
+
+            <button onclick="showPage('prediction')" class="nav-btn">
+                🤖 Delay Prediction
+            </button>
+
+            <button onclick="showPage('analytics')" class="nav-btn">
+                📈 Analytics
+            </button>
+
+            <button onclick="showPage('alerts')" class="nav-btn">
+                🚨 Alerts
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            Ministry of Rural Development
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="topbar">
+
+            <div>
+                <h1 id="pageTitle">Dashboard</h1>
+                <p>Predictive Analytics System for Land Acquisition Delays</p>
+            </div>
+
+            <div class="user">
+                👤 Admin
+            </div>
+
+        </header>
+
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="page active-page">
+
+            <div class="welcome">
+                <h2>Land Acquisition Monitoring Dashboard</h2>
+                <p>
+                    Monitor projects and identify potential delays at an early stage.
+                </p>
+            </div>
+
+
+            <!-- Statistics -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon">📁</div>
+                    <div>
+                        <h3>128</h3>
+                        <p>Total Projects</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div>
+                        <h3>82</h3>
+                        <p>On-Time Projects</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div>
+                        <h3>31</h3>
+                        <p>Delayed Projects</p>
+                    </div>
+                </div>
+
+                <div class="stat-card danger">
+                    <div class="stat-icon">🚨</div>
+                    <div>
+                        <h3>15</h3>
+                        <p>High Risk Projects</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Risk Projects -->
+            <div class="content-card">
+
+                <div class="card-header">
+                    <h2>Project Risk Overview</h2>
+                    <span>AI Analysis</span>
+                </div>
+
+                <div class="project-row">
+                    <div>
+                        <strong>Rural Road Development</strong>
+                        <small>Dharmapuri</small>
+                    </div>
+
+                    <span class="risk high">HIGH RISK</span>
+                </div>
+
+                <div class="project-row">
+                    <div>
+                        <strong>Village Infrastructure Project</strong>
+                        <small>Salem</small>
+                    </div>
+
+                    <span class="risk medium">MEDIUM RISK</span>
+                </div>
+
+                <div class="project-row">
+                    <div>
+                        <strong>Rural Housing Project</strong>
+                        <small>Krishnagiri</small>
+                    </div>
+
+                    <span class="risk low">LOW RISK</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Projects -->
+        <section id="projects" class="page">
+
+            <div class="content-card">
+
+                <h2>Land Acquisition Projects</h2>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>District</th>
+                            <th>Land Parcels</th>
+                            <th>Status</th>
+                            <th>Risk</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Rural Road Development</td>
+                            <td>Dharmapuri</td>
+                            <td>50</td>
+                            <td>In Progress</td>
+                            <td><span class="risk high">High</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Village Infrastructure</td>
+                            <td>Salem</td>
+                            <td>35</td>
+                            <td>In Progress</td>
+                            <td><span class="risk medium">Medium</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Rural Housing</td>
+                            <td>Krishnagiri</td>
+                            <td>20</td>
+                            <td>On Track</td>
+                            <td><span class="risk low">Low</span></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- Add Project -->
+        <section id="add" class="page">
+
+            <div class="content-card">
+
+                <h2>Add Land Acquisition Project</h2>
+
+                <form onsubmit="calculateRisk(event)">
+
+                    <div class="form-grid">
+
+                        <div>
+                            <label>Project Name</label>
+                            <input id="projectName" type="text"
+                                   placeholder="Enter project name" required>
+                        </div>
+
+                        <div>
+                            <label>District</label>
+                            <input id="district" type="text"
+                                   placeholder="Enter district" required>
+                        </div>
+
+                        <div>
+                            <label>Land Parcels</label>
+                            <input id="parcels" type="number"
+                                   placeholder="Number of parcels" required>
+                        </div>
+
+                        <div>
+                            <label>Pending Documents</label>
+                            <input id="documents" type="number"
+                                   placeholder="Number pending" required>
+                        </div>
+
+                        <div>
+                            <label>Legal Disputes</label>
+                            <input id="legal" type="number"
+                                   placeholder="Number of disputes" required>
+                        </div>
+
+                        <div>
+                            <label>Pending Days</label>
+                            <input id="days" type="number"
+                                   placeholder="Number of days" required>
+                        </div>
+
+                    </div>
+
+                    <div class="checkbox-area">
+
+                        <label>
+                            <input id="compensation" type="checkbox">
+                            Compensation Pending
+                        </label>
+
+                        <label>
+                            <input id="approval" type="checkbox">
+                            Government Approval Pending
+                        </label>
+
+                    </div>
+
+                    <button class="primary-btn" type="submit">
+                        🤖 Predict Delay Risk
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- Prediction -->
+        <section id="prediction" class="page">
+
+            <div class="prediction-card">
+
+                <div class="robot">🤖</div>
+
+                <h2>AI Delay Prediction</h2>
+
+                <p>
+                    The system analyses project conditions and estimates
+                    the probability of delay.
+                </p>
+
+                <div id="predictionResult">
+
+                    <div class="prediction-placeholder">
+                        Add a project to generate a prediction.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Analytics -->
+        <section id="analytics" class="page">
+
+            <div class="content-card">
+
+                <h2>Project Analytics</h2>
+
+                <div class="bar-chart">
+
+                    <div class="bar">
+                        <span>Completed</span>
+                        <div style="width:70%">82</div>
+                    </div>
+
+                    <div class="bar">
+                        <span>Delayed</span>
+                        <div style="width:35%">31</div>
+                    </div>
+
+                    <div class="bar">
+                        <span>High Risk</span>
+                        <div style="width:20%">15</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Alerts -->
+        <section id="alerts" class="page">
+
+            <div class="content-card">
+
+                <h2>🚨 Early Warning Alerts</h2>
+
+                <div class="alert high-alert">
+                    <strong>High Risk Alert</strong>
+                    <p>
+                        Rural Road Development has a high probability
+                        of land acquisition delay.
+                    </p>
+                </div>
+
+                <div class="alert medium-alert">
+                    <strong>Medium Risk Alert</strong>
+                    <p>
+                        Compensation is pending for Village Infrastructure Project.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
