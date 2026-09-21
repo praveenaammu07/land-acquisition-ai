@@ -1,21 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Land Acquisition AI</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>Land Acquisition AI</h1>
-        <p>Predictive Analytics System for Early Detection of Land Acquisition Delays</p>
-    </header>
+<div class="container">
 
-    <main class="container">
+    <h1>Land Acquisition AI</h1>
+    <p class="subtitle">
+        Predictive Analytics for Early Detection of Land Acquisition Delays
+    </p>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+
+        <div class="card">
+            <h3>Total Projects</h3>
+            <h2 id="totalProjects">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>High Risk</h3>
+            <h2 id="highRisk">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Medium Risk</h3>
+            <h2 id="mediumRisk">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Low Risk</h3>
+            <h2 id="lowRisk">0</h2>
+        </div>
+
+    </div>
+
+    <!-- Prediction Form -->
+
+    <div class="prediction-box">
 
         <h2>Delay Prediction</h2>
 
@@ -30,11 +56,23 @@
 
         <button onclick="predictDelay()">Predict Delay</button>
 
-        <div id="result"></div>
+    </div>
 
-    </main>
+    <!-- Result -->
 
-    <script src="script.js"></script>
+    <div id="result" class="result-box">
+
+        <h2>Prediction Result</h2>
+
+        <p id="risk"></p>
+        <p id="delay"></p>
+        <p id="recommendation"></p>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
