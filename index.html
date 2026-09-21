@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Land Acquisition AI</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -9,70 +14,249 @@
 
 <div class="container">
 
-    <h1>Land Acquisition AI</h1>
-    <p class="subtitle">
-        Predictive Analytics for Early Detection of Land Acquisition Delays
-    </p>
+    <!-- HEADER -->
+    <header class="header">
+        <h1>Land Acquisition AI</h1>
 
-    <!-- Dashboard -->
-    <div class="dashboard">
+        <p>
+            Predictive Analytics for Early Detection of Land Acquisition Delays
+        </p>
+    </header>
+
+
+    <!-- DASHBOARD -->
+    <section class="dashboard">
 
         <div class="card">
+            <span>📁</span>
             <h3>Total Projects</h3>
             <h2 id="totalProjects">0</h2>
         </div>
 
         <div class="card">
+            <span>🔴</span>
             <h3>High Risk</h3>
             <h2 id="highRisk">0</h2>
         </div>
 
         <div class="card">
+            <span>🟡</span>
             <h3>Medium Risk</h3>
             <h2 id="mediumRisk">0</h2>
         </div>
 
         <div class="card">
+            <span>🟢</span>
             <h3>Low Risk</h3>
             <h2 id="lowRisk">0</h2>
         </div>
 
-    </div>
+    </section>
 
-    <!-- Prediction Form -->
 
-    <div class="prediction-box">
+    <!-- PROJECT INFORMATION -->
+    <section class="prediction-box">
 
-        <h2>Delay Prediction</h2>
+        <h2>📋 Project Information</h2>
+
+        <label>Project ID</label>
+        <input
+            type="text"
+            id="projectId"
+            placeholder="Example: LA001"
+        >
+
+        <label>Project Name</label>
+        <input
+            type="text"
+            id="projectName"
+            placeholder="Enter project name"
+        >
+
+        <label>District / Location</label>
+        <input
+            type="text"
+            id="location"
+            placeholder="Example: Chennai"
+        >
+
+        <label>Officer Name</label>
+        <input
+            type="text"
+            id="officer"
+            placeholder="Enter officer name"
+        >
+
+        <label>Project Start Date</label>
+        <input
+            type="date"
+            id="startDate"
+        >
+
+    </section>
+
+
+    <!-- DELAY PREDICTION -->
+    <section class="prediction-box">
+
+        <h2>🔮 Delay Prediction</h2>
 
         <label>Land Area (Acres)</label>
-        <input type="number" id="landArea" placeholder="Enter land area">
+        <input
+            type="number"
+            id="landArea"
+            placeholder="Enter land area"
+        >
 
         <label>Documents Completed (%)</label>
-        <input type="number" id="documents" placeholder="Enter percentage">
+        <input
+            type="number"
+            id="documents"
+            min="0"
+            max="100"
+            placeholder="Enter percentage"
+        >
 
         <label>Approval Status (%)</label>
-        <input type="number" id="approval" placeholder="Enter percentage">
+        <input
+            type="number"
+            id="approval"
+            min="0"
+            max="100"
+            placeholder="Enter percentage"
+        >
 
-        <button onclick="predictDelay()">Predict Delay</button>
+        <button onclick="predictDelay()">
+            🔍 Predict Delay
+        </button>
 
-    </div>
+    </section>
 
-    <!-- Result -->
 
-    <div id="result" class="result-box">
+    <!-- PREDICTION RESULT -->
+    <section
+        id="result"
+        class="result-box"
+    >
 
-        <h2>Prediction Result</h2>
+        <h2>📊 Prediction Result</h2>
 
         <p id="risk"></p>
+
         <p id="delay"></p>
+
         <p id="recommendation"></p>
 
-    </div>
+    </section>
+
+
+    <!-- PROJECT PROGRESS -->
+    <section class="prediction-box">
+
+        <h2>📈 Project Progress</h2>
+
+        <div class="progress-item">
+
+            <div class="progress-title">
+                <span>Documents</span>
+                <span id="documentProgress">0%</span>
+            </div>
+
+            <div class="progress-bar">
+                <div
+                    id="documentBar"
+                    class="progress-fill"
+                    style="width:0%"
+                ></div>
+            </div>
+
+        </div>
+
+
+        <div class="progress-item">
+
+            <div class="progress-title">
+                <span>Approval</span>
+                <span id="approvalProgress">0%</span>
+            </div>
+
+            <div class="progress-bar">
+                <div
+                    id="approvalBar"
+                    class="progress-fill"
+                    style="width:0%"
+                ></div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ALERT -->
+    <section class="alert-box">
+
+        <h2>🔔 Smart Alert</h2>
+
+        <p id="alertMessage">
+            No active alerts.
+        </p>
+
+    </section>
+
+
+    <!-- PROJECT HISTORY -->
+    <section class="prediction-box">
+
+        <h2>📋 Project History</h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Project ID</th>
+                        <th>Project</th>
+                        <th>Location</th>
+                        <th>Risk</th>
+                        <th>Delay</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="historyTable">
+
+                    <tr>
+                        <td colspan="5">
+                            No projects yet
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 Land Acquisition AI | Smart Predictive Analytics
+        </p>
+
+    </footer>
 
 </div>
+
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
