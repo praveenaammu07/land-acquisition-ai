@@ -330,3 +330,127 @@ footer {
     }
 
 }
+/* =========================
+   EXPLAINABLE RISK
+========================= */
+
+.risk-score-box {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.risk-score-box div {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.risk-score-box span {
+    display: block;
+    font-size: 15px;
+}
+
+.risk-score-box strong {
+    font-size: 50px;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.risk-score-box small {
+    font-size: 18px;
+}
+
+
+.risk-factors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.factor {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.factor strong {
+    display: block;
+    font-size: 24px;
+    margin-top: 8px;
+}
+
+
+.ai-explanation {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 14px;
+    background: #eef8f5;
+}
+
+.ai-explanation h3 {
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   WHAT IF
+========================= */
+
+input[type="range"] {
+    width: 100%;
+    margin: 15px 0;
+}
+
+.slider-value {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.slider-value strong {
+    font-size: 18px;
+}
+
+
+.what-if-result {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.what-if-result div {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.what-if-result span {
+    display: block;
+    font-size: 14px;
+}
+
+.what-if-result strong {
+    display: block;
+    font-size: 22px;
+    margin-top: 8px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .risk-factors {
+        grid-template-columns: 1fr;
+    }
+
+    .what-if-result {
+        grid-template-columns: 1fr;
+    }
+
+}
