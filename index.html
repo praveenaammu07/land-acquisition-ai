@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!-- PROJECT MANAGEMENT -->
 
 <section class="prediction-box">
@@ -19,7 +20,7 @@
     </select>
 
 </section> 
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -73,7 +74,79 @@
         </div>
 
     </section>
+<!-- PROJECT MANAGEMENT -->
 
+<section class="prediction-box">
+
+    <h2>🔎 Project Management</h2>
+
+    <div class="search-row">
+
+        <input
+            type="text"
+            id="searchProject"
+            placeholder="🔍 Search Project ID or Name..."
+            oninput="filterProjects()"
+        >
+
+        <select
+            id="riskFilter"
+            onchange="filterProjects()"
+        >
+            <option value="ALL">All Risk Levels</option>
+            <option value="HIGH">🔴 High Risk</option>
+            <option value="MEDIUM">🟡 Medium Risk</option>
+            <option value="LOW">🟢 Low Risk</option>
+        </select>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK ANALYTICS -->
+
+<section class="prediction-box">
+
+    <h2>📊 Quick Analytics</h2>
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+            <h3>📄 Documents</h3>
+            <div class="analytics-number" id="avgDocuments">
+                0%
+            </div>
+            <p>Average completion</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3>✅ Approval</h3>
+            <div class="analytics-number" id="avgApproval">
+                0%
+            </div>
+            <p>Average approval</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3>⏳ Delayed</h3>
+            <div class="analytics-number" id="delayedProjects">
+                0
+            </div>
+            <p>Projects requiring attention</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3>📅 Status</h3>
+            <div class="analytics-number" id="activeProjects">
+                0
+            </div>
+            <p>Active projects</p>
+        </div>
+
+    </div>
+
+</section>
 
     <!-- PROJECT INFORMATION -->
     <section class="prediction-box">
@@ -105,9 +178,30 @@
         <input
             type="text"
             id="officer"
-            placeholder="Enter officer name"
-        >
 
+        placeholder="Enter officer name"
+        >
+<label>Project Status</label>
+
+<select id="projectStatus">
+
+    <option value="Pending">
+        ⏳ Pending
+    </option>
+
+    <option value="In Progress">
+        🔵 In Progress
+    </option>
+
+    <option value="Completed">
+        🟢 Completed
+    </option>
+
+    <option value="On Hold">
+        🟠 On Hold
+    </option>
+
+</select>
         <label>Project Start Date</label>
         <input
             type="date"
