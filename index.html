@@ -1,3 +1,24 @@
+<!-- PROJECT MANAGEMENT -->
+
+<section class="prediction-box">
+
+    <h2>🔎 Project Management</h2>
+
+    <input
+        type="text"
+        id="searchProject"
+        placeholder="Search Project ID or Name..."
+        oninput="filterProjects()"
+    >
+
+    <select id="riskFilter" onchange="filterProjects()">
+        <option value="ALL">All Risk Levels</option>
+        <option value="HIGH">High Risk</option>
+        <option value="MEDIUM">Medium Risk</option>
+        <option value="LOW">Low Risk</option>
+    </select>
+
+</section> 
 <!DOCTYPE html>
 <html lang="en">
 
