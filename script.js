@@ -1,78 +1,407 @@
-let totalProjects = 0;
-let highRisk = 0;
-let mediumRisk = 0;
-let lowRisk = 0;
+let projects = JSON.parse(localStorage.getItem("landProjects")) || [];
+
+
+/* =========================
+   PREDICT DELAY
+========================= */
 
 function predictDelay() {
 
-    const landArea = Number(document.getElementById("landArea").value);
-    const documents = Number(document.getElementById("documents").value);
-    const approval = Number(document.getElementById("approval").value);
+    const projectId = document.getElementById("projectId").value.trim();
+    const projectName = document.getElementById("projectName").value.trim();
+    const location = document.getElementById("location").value.trim();
+    const officer = document.getElementById("officer").value.trim();
 
-    if (!landArea || documents < 0 || approval < 0) {
-        alert("Please enter valid project details.");
+    const landArea = Number(
+        document.getElementById("landArea").value
+    );
+
+    const documents = Number(
+        document.getElementById("documents").value
+    );
+
+    const approval = Number(
+        document.getElementById("approval").value
+    );
+
+
+    /* VALIDATION */
+
+    if (
+        !projectId ||
+        !projectName ||
+        !location ||
+        !officer ||
+        !landArea ||
+        isNaN(documents) ||
+        isNaN(approval)
+    ) {
+
+        alert(
+            "Please enter all project details before prediction."
+        );
+
         return;
     }
 
-    if (documents > 100 || approval > 100) {
-        alert("Percentage must be between 0 and 100.");
+
+    if (
+        documents < 0 ||
+        documents > 100 ||
+        approval < 0 ||
+        approval > 100
+    ) {
+
+        alert(
+            "Documents and Approval must be between 0 and 100."
+        );
+
         return;
     }
 
-    /*
-       Simple risk calculation for the hackathon demo.
-       Lower document/approval completion = higher risk.
-    */
 
-    const completionScore = (documents + approval) / 2;
+    /* =========================
+       RISK CALCULATION
+    ========================= */
+
+    const completionScore =
+        (documents + approval) / 2;
+
 
     let risk;
+    let riskPercentage;
     let delayDays;
     let recommendation;
+
 
     if (completionScore < 40) {
 
         risk = "HIGH";
+        riskPercentage = 80 + Math.round(
+            (40 - completionScore) / 2
+        );
+
         delayDays = 30;
-        highRisk++;
 
         recommendation =
-            "⚠️ Immediate action required. Complete pending documents and approvals.";
+            "Immediate action required. Complete pending documents and speed up approval processing.";
 
-    } else if (completionScore < 70) {
-
-        risk = "MEDIUM";
-        delayDays = 15;
-        mediumRisk++;
-
-        recommendation =
-            "⚠️ Follow up on pending documents and approval processes.";
-
-    } else {
-
-        risk = "LOW";
-        delayDays = 5;
-        lowRisk++;
-
-        recommendation =
-            "✅ Project is progressing well. Continue monitoring the process.";
     }
 
-    totalProjects++;
+    else if (completionScore < 70) {
 
-    document.getElementById("totalProjects").innerText = totalProjects;
-    document.getElementById("highRisk").innerText = highRisk;
-    document.getElementById("mediumRisk").innerText = mediumRisk;
-    document.getElementById("lowRisk").innerText = lowRisk;
+        risk = "MEDIUM";
+        riskPercentage = 50 + Math.round(
+            (70 - completionScore) / 2
+        );
 
-    document.getElementById("result").style.display = "block";
+        delayDays = 15;
+
+        recommendation =
+            "Follow up on pending documents and approval procedures to avoid further delay.";
+
+    }
+
+    else {
+
+        risk = "LOW";
+        riskPercentage = Math.max(
+            10,
+            40 - Math.round(completionScore - 70)
+        );
+
+        delayDays = 5;
+
+        recommendation =
+            "Project is progressing well. Continue regular monitoring.";
+
+    }
+
+
+    /* =========================
+       SAVE PROJECT
+    ========================= */
+
+    const project = {
+
+        id: projectId,
+        name: projectName,
+        location: location,
+        officer: officer,
+        landArea: landArea,
+
+        documents: documents,
+        approval: approval,
+
+        risk: risk,
+        riskPercentage: riskPercentage,
+
+        delayDays: delayDays,
+
+        date: new Date().toLocaleDateString()
+
+    };
+
+
+    projects.push(project);
+
+
+    localStorage.setItem(
+        "landProjects",
+        JSON.stringify(projects)
+    );
+
+
+    /* =========================
+       SHOW RESULT
+    ========================= */
+
+    document.getElementById("result").style.display =
+        "block";
+
 
     document.getElementById("risk").innerHTML =
-        "<strong>Risk Level:</strong> " + risk;
+        "⚠️ <strong>Risk Level:</strong> " +
+        risk +
+        " (" +
+        riskPercentage +
+        "%)";
+
 
     document.getElementById("delay").innerHTML =
-        "<strong>Estimated Delay:</strong> " + delayDays + " days";
+        "⏳ <strong>Estimated Delay:</strong> " +
+        delayDays +
+        " days";
+
 
     document.getElementById("recommendation").innerHTML =
-        "<strong>Recommendation:</strong> " + recommendation;
+        "💡 <strong>AI Recommendation:</strong> " +
+        recommendation;
+
+
+    /* =========================
+       PROGRESS
+    ========================= */
+
+    document.getElementById(
+        "documentProgress"
+    ).innerText = documents + "%";
+
+
+    document.getElementById(
+        "documentBar"
+    ).style.width = documents + "%";
+
+
+    document.getElementById(
+        "approvalProgress"
+    ).innerText = approval + "%";
+
+
+    document.getElementById(
+        "approvalBar"
+    ).style.width = approval + "%";
+
+
+    /* =========================
+       SMART ALERT
+    ========================= */
+
+    let alertMessage =
+        "✅ No critical alerts. Project is being monitored.";
+
+    if (risk === "HIGH") {
+
+        alertMessage =
+            "🚨 HIGH RISK: " +
+            projectName +
+            " may face approximately " +
+            delayDays +
+            " days of delay. Immediate action recommended.";
+
+    }
+
+    else if (risk === "MEDIUM") {
+
+        alertMessage =
+            "⚠️ MEDIUM RISK: " +
+            projectName +
+            " needs follow-up on pending activities.";
+
+    }
+
+
+    document.getElementById(
+        "alertMessage"
+    ).innerText = alertMessage;
+
+
+    /* =========================
+       UPDATE DASHBOARD
+    ========================= */
+
+    updateDashboard();
+
+
+    /* =========================
+       UPDATE HISTORY
+    ========================= */
+
+    updateHistory();
+
+
+    /* =========================
+       CLEAR FORM
+    ========================= */
+
+    document.getElementById(
+        "projectId"
+    ).value = "";
+
+    document.getElementById(
+        "projectName"
+    ).value = "";
+
+    document.getElementById(
+        "location"
+    ).value = "";
+
+    document.getElementById(
+        "officer"
+    ).value = "";
+
+    document.getElementById(
+        "landArea"
+    ).value = "";
+
+    document.getElementById(
+        "documents"
+    ).value = "";
+
+    document.getElementById(
+        "approval"
+    ).value = "";
+
 }
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function updateDashboard() {
+
+    const total =
+        projects.length;
+
+    const high =
+        projects.filter(
+            p => p.risk === "HIGH"
+        ).length;
+
+    const medium =
+        projects.filter(
+            p => p.risk === "MEDIUM"
+        ).length;
+
+    const low =
+        projects.filter(
+            p => p.risk === "LOW"
+        ).length;
+
+
+    document.getElementById(
+        "totalProjects"
+    ).innerText = total;
+
+
+    document.getElementById(
+        "highRisk"
+    ).innerText = high;
+
+
+    document.getElementById(
+        "mediumRisk"
+    ).innerText = medium;
+
+
+    document.getElementById(
+        "lowRisk"
+    ).innerText = low;
+
+}
+
+
+/* =========================
+   PROJECT HISTORY
+========================= */
+
+function updateHistory() {
+
+    const table =
+        document.getElementById(
+            "historyTable"
+        );
+
+
+    if (projects.length === 0) {
+
+        table.innerHTML =
+            `
+            <tr>
+                <td colspan="5">
+                    No projects yet
+                </td>
+            </tr>
+            `;
+
+        return;
+    }
+
+
+    table.innerHTML = "";
+
+
+    projects
+        .slice()
+        .reverse()
+        .forEach(project => {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>${project.id}</td>
+
+                <td>${project.name}</td>
+
+                <td>${project.location}</td>
+
+                <td>
+                    ${project.risk}
+                    (${project.riskPercentage}%)
+                </td>
+
+                <td>
+                    ${project.delayDays} days
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        });
+
+}
+
+
+/* =========================
+   LOAD SAVED DATA
+========================= */
+
+updateDashboard();
+
+updateHistory();
