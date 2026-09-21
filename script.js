@@ -471,3 +471,177 @@ function filterProjects() {
             table.appendChild(row);
         });
 }
+/* =========================
+   EXPLAINABLE RISK SCORE
+========================= */
+
+function updateRiskAnalysis(
+    documents,
+    approval,
+    landArea,
+    riskScore
+) {
+
+    document.getElementById("riskScore").innerText =
+        riskScore;
+
+    document.getElementById("documentFactor").innerText =
+        documents + "%";
+
+    document.getElementById("approvalFactor").innerText =
+        approval + "%";
+
+
+    let landFactor = 10;
+
+    if (landArea > 100) {
+        landFactor = 30;
+    }
+    else if (landArea > 50) {
+        landFactor = 20;
+    }
+
+    document.getElementById("landFactor").innerText =
+        landFactor + "%";
+
+
+    let explanation = "";
+
+    if (documents < 40) {
+
+        explanation +=
+            "📄 Document completion is low. ";
+
+    }
+
+    if (approval < 40) {
+
+        explanation +=
+            "✅ Approval progress is low. ";
+
+    }
+
+    if (landArea > 100) {
+
+        explanation +=
+            "🌍 Large land area may require additional coordination. ";
+
+    }
+
+    if (explanation === "") {
+
+        explanation =
+            "The project currently shows stable progress based on the entered information.";
+
+    }
+
+    document.getElementById(
+        "riskExplanation"
+    ).innerText = explanation;
+}
+
+
+/* =========================
+   WHAT-IF SIMULATOR
+========================= */
+
+function runWhatIf() {
+
+    const documents =
+        Number(
+            document.getElementById(
+                "whatIfDocuments"
+            ).value
+        );
+
+    const approval =
+        Number(
+            document.getElementById(
+                "whatIfApproval"
+            ).value
+        );
+
+
+    document.getElementById(
+        "whatIfDocumentsValue"
+    ).innerText = documents + "%";
+
+
+    document.getElementById(
+        "whatIfApprovalValue"
+    ).innerText = approval + "%";
+
+
+    const completion =
+        (documents + approval) / 2;
+
+
+    let risk;
+    let score;
+    let delay;
+
+
+    if (completion < 40) {
+
+        risk = "HIGH";
+
+        score =
+            Math.min(
+                100,
+                80 + Math.round(
+                    (40 - completion) / 2
+                )
+            );
+
+        delay = 30;
+
+    }
+
+    else if (completion < 70) {
+
+        risk = "MEDIUM";
+
+        score =
+            50 + Math.round(
+                (70 - completion) / 2
+            );
+
+        delay = 15;
+
+    }
+
+    else {
+
+        risk = "LOW";
+
+        score =
+            Math.max(
+                10,
+                40 - Math.round(
+                    completion - 70
+                )
+            );
+
+        delay = 5;
+    }
+
+
+    document.getElementById(
+        "whatIfRisk"
+    ).innerText = risk;
+
+
+    document.getElementById(
+        "whatIfScore"
+    ).innerText = score;
+
+
+    document.getElementById(
+        "whatIfDelay"
+    ).innerText = delay + " days";
+}
+
+
+/* Start simulator */
+
+runWhatIf();
