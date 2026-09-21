@@ -405,3 +405,69 @@ function updateHistory() {
 updateDashboard();
 
 updateHistory();
+function filterProjects() {
+
+    const search =
+        document.getElementById("searchProject")
+        .value
+        .toLowerCase();
+
+    const risk =
+        document.getElementById("riskFilter")
+        .value;
+
+    const filtered = projects.filter(project => {
+
+        const matchesSearch =
+            project.id.toLowerCase().includes(search) ||
+            project.name.toLowerCase().includes(search);
+
+        const matchesRisk =
+            risk === "ALL" ||
+            project.risk === risk;
+
+        return matchesSearch && matchesRisk;
+    });
+
+    const table =
+        document.getElementById("historyTable");
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    No matching projects found
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    table.innerHTML = "";
+
+    filtered
+        .slice()
+        .reverse()
+        .forEach(project => {
+
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${project.id}</td>
+                <td>${project.name}</td>
+                <td>${project.location}</td>
+                <td>
+                    ${project.risk}
+                    (${project.riskPercentage}%)
+                </td>
+                <td>
+                    ${project.delayDays} days
+                </td>
+            `;
+
+            table.appendChild(row);
+        });
+}
