@@ -264,7 +264,111 @@
 
     </section>
 
+<!-- EXPLAINABLE AI -->
+<section class="prediction-box">
 
+    <h2>🤖 Explainable Risk Analysis</h2>
+
+    <div class="risk-score-box">
+        <div>
+            <span>Overall Risk Score</span>
+            <strong id="riskScore">0</strong>
+            <small>/ 100</small>
+        </div>
+    </div>
+
+    <div class="risk-factors">
+
+        <div class="factor">
+            <span>📄 Documents</span>
+            <strong id="documentFactor">0%</strong>
+        </div>
+
+        <div class="factor">
+            <span>✅ Approval</span>
+            <strong id="approvalFactor">0%</strong>
+        </div>
+
+        <div class="factor">
+            <span>🌍 Land Area</span>
+            <strong id="landFactor">0%</strong>
+        </div>
+
+    </div>
+
+    <div class="ai-explanation">
+        <h3>💡 Why this risk?</h3>
+        <p id="riskExplanation">
+            Complete a prediction to see the risk explanation.
+        </p>
+    </div>
+
+</section>
+
+
+<!-- WHAT-IF SIMULATOR -->
+<section class="prediction-box">
+
+    <h2>🔮 What-If Simulator</h2>
+
+    <p>
+        Change the values to see how the predicted risk may change.
+    </p>
+
+    <label>Documents Completion</label>
+
+    <input
+        type="range"
+        id="whatIfDocuments"
+        min="0"
+        max="100"
+        value="50"
+        oninput="runWhatIf()"
+    >
+
+    <div class="slider-value">
+        <span>Documents</span>
+        <strong id="whatIfDocumentsValue">50%</strong>
+    </div>
+
+
+    <label>Approval Status</label>
+
+    <input
+        type="range"
+        id="whatIfApproval"
+        min="0"
+        max="100"
+        value="50"
+        oninput="runWhatIf()"
+    >
+
+    <div class="slider-value">
+        <span>Approval</span>
+        <strong id="whatIfApprovalValue">50%</strong>
+    </div>
+
+
+    <div class="what-if-result">
+
+        <div>
+            <span>Risk Level</span>
+            <strong id="whatIfRisk">MEDIUM</strong>
+        </div>
+
+        <div>
+            <span>Risk Score</span>
+            <strong id="whatIfScore">60</strong>
+        </div>
+
+        <div>
+            <span>Estimated Delay</span>
+            <strong id="whatIfDelay">15 days</strong>
+        </div>
+
+    </div>
+
+</section>
     <!-- PROJECT PROGRESS -->
     <section class="prediction-box">
 
