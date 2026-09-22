@@ -7,8 +7,7 @@
 body {
     background:
         linear-gradient(rgba(15, 45, 35, 0.65), rgba(15, 45, 35, 0.65)),
-        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80");
-
+&q=        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80")
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
