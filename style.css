@@ -520,3 +520,6 @@ textarea {
 button {
     color: #fff !important;
 }
+body {
+    background: linear-gradient(135deg, #e0f2fe, #eef2ff, #f8fafc);
+}
