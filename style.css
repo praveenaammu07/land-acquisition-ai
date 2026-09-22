@@ -476,3 +476,15 @@ input[type="range"] {
     }
 
 }
+table {
+    color: #222 !important;
+    background: white !important;
+}
+table th {
+    color: white !important;
+    background: #0b7285 !important;
+}
+table td {
+    color: #222 !important;
+    background: white !important;
+}
