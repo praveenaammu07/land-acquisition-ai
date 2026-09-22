@@ -488,3 +488,11 @@ table td {
     color: #222 !important;
     background: white !important;
 }
+body {
+    overflow-y: auto !important;
+}
+
+section, .container, .dashboard {
+    overflow: visible !important;
+    height: auto !important;
+}
