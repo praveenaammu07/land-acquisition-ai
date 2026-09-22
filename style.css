@@ -20,6 +20,16 @@ body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
 }
+table td {
+    color: #1f2937 !important;
+    background-color: #ffffff;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+table th {
+    color: #ffffff !important;
+}
 
 }
 
