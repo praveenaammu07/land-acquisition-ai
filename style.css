@@ -496,3 +496,27 @@ section, .container, .dashboard {
     overflow: visible !important;
     height: auto !important;
 }
+/* Fix invisible text */
+table,
+table th,
+table td,
+section,
+section h1,
+section h2,
+section h3,
+section p,
+label,
+span {
+    color: #222 !important;
+}
+
+input,
+select,
+textarea {
+    color: #222 !important;
+    background-color: #fff !important;
+}
+
+button {
+    color: #fff !important;
+}
